@@ -23,12 +23,13 @@ export class TcpClient {
     this.socket = new Socket();
 
     this.socket.connect(port, host, () => {
-      console.log(`Connected to ${host}:${port}`);
+      console.log(`TCP connected to ${host}:${port}`);
       // Send handshake
       this.sendHandshake();
     });
 
     this.socket.on('data', (data: Buffer) => {
+      console.log('Received TCP data:', data.length, 'bytes');
       this.handleData(data);
     });
 
@@ -56,6 +57,7 @@ export class TcpClient {
 
     const data = Buffer.concat([protocolEncoded, addressEncoded, portEncoded, nextStateEncoded]);
     const packet = { id: 0x00, data };
+    console.log('Sending handshake packet');
     this.send(this.codec.encodeMinecraftPacket(packet));
   }
 

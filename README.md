@@ -62,9 +62,13 @@ Edit `config.json` to change backend server settings:
 ## Deployment on Render.com
 
 1. Connect your GitHub repository to Render.com
-2. Create a new Web Service
-3. Set the build command to: `npm install && npm run build`
-4. Set the start command to: `npm start`
+2. Create a new **Web Service**
+3. Select **Node.js** as the runtime/language
+4. Configure the following settings:
+   - **Root Directory**: Leave empty (uses repository root)
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
+   - **Publish Directory**: Leave empty (not needed for Node.js apps)
 5. Render will automatically set the `PORT` environment variable
 
 ## Packet Translators

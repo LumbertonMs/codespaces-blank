@@ -18,11 +18,12 @@ class TcpClient {
         this.session = session;
         this.socket = new net_1.Socket();
         this.socket.connect(port, host, () => {
-            console.log(`Connected to ${host}:${port}`);
+            console.log(`TCP connected to ${host}:${port}`);
             // Send handshake
             this.sendHandshake();
         });
         this.socket.on('data', (data) => {
+            console.log('Received TCP data:', data.length, 'bytes');
             this.handleData(data);
         });
         this.socket.on('close', () => {
@@ -45,6 +46,7 @@ class TcpClient {
         const nextStateEncoded = VarInt_1.VarInt.encode(nextState);
         const data = Buffer.concat([protocolEncoded, addressEncoded, portEncoded, nextStateEncoded]);
         const packet = { id: 0x00, data };
+        console.log('Sending handshake packet');
         this.send(this.codec.encodeMinecraftPacket(packet));
     }
     send(data) {

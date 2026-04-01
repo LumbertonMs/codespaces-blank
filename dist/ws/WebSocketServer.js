@@ -13,7 +13,9 @@ class WebSocketServer {
     }
     start(port) {
         this.wss = new ws_1.WebSocketServer({ port });
+        console.log(`WebSocket server starting on port ${port}`);
         this.wss.on('connection', (ws) => {
+            console.log('New WebSocket connection established');
             if (this.wss.clients.size > this.maxClients) {
                 ws.close();
                 return;
@@ -21,9 +23,11 @@ class WebSocketServer {
             const session = this.sessionManager.createSession(ws);
             session.tcp.connect(this.backendHost, this.backendPort, session);
             ws.on('message', (data) => {
+                console.log('Received WebSocket message:', data.length, 'bytes');
                 this.handleMessage(session, data);
             });
             ws.on('close', () => {
+                console.log('WebSocket connection closed');
                 session.tcp.disconnect();
                 this.sessionManager.removeSession(session.id);
             });
@@ -32,6 +36,9 @@ class WebSocketServer {
                 session.tcp.disconnect();
                 this.sessionManager.removeSession(session.id);
             });
+        });
+        this.wss.on('error', (error) => {
+            console.error('WebSocket server error:', error);
         });
     }
     handleMessage(session, data) {

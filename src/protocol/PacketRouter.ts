@@ -36,19 +36,27 @@ export class PacketRouter {
 
   handleClientPacket(session: any, data: Buffer): void {
     const packet = this.codec.decodeWebSocketFrame(data);
+    console.log('Decoded client packet - ID:', packet.id, 'Data length:', packet.data.length);
     const translator = this.clientTranslators.get(packet.id);
     if (translator) {
       const mcPacket = translator.toMinecraft(packet);
+      console.log('Translated to Minecraft packet - ID:', mcPacket.id);
       session.tcp.send(this.codec.encodeMinecraftPacket(mcPacket));
+    } else {
+      console.log('No translator found for client packet ID:', packet.id);
     }
   }
 
   handleServerPacket(session: any, data: Buffer): void {
     const packet = this.codec.decodeMinecraftPacket(data);
+    console.log('Decoded server packet - ID:', packet.id, 'Data length:', packet.data.length);
     const translator = this.serverTranslators.get(packet.id);
     if (translator) {
       const wsFrame = translator.fromMinecraft(packet);
+      console.log('Translated to WebSocket frame - Opcode:', wsFrame.opcode);
       session.ws.send(this.codec.encodeWebSocketFrame(wsFrame));
+    } else {
+      console.log('No translator found for server packet ID:', packet.id);
     }
   }
 }
