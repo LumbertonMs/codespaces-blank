@@ -51,7 +51,8 @@ class PacketRouter {
         console.log('Decoded server packet - ID:', packet.id, 'Data length:', packet.data.length);
         const translator = this.serverTranslators.get(packet.id);
         if (translator) {
-            const wsFrame = translator.fromMinecraft(packet);
+            const result = translator.fromMinecraft(packet);
+            const wsFrame = { opcode: result.id, payload: result.data };
             console.log('Translated to WebSocket frame - Opcode:', wsFrame.opcode);
             session.ws.send(this.codec.encodeWebSocketFrame(wsFrame));
         }
