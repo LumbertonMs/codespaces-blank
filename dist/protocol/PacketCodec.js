@@ -4,10 +4,9 @@ exports.PacketCodec = void 0;
 const VarInt_1 = require("../utils/VarInt");
 class PacketCodec {
     decodeWebSocketFrame(data) {
-        // Assume format: [packetId: uint8] [payload]
-        const id = data.readUInt8(0);
-        const payload = data.slice(1);
-        return { id, data: payload };
+        // Assume the entire message is the payload for packet ID 0 (login)
+        // Client is sending malformed data
+        return { id: 0, data: data };
     }
     encodeWebSocketFrame(frame) {
         // Format: [opcode: uint8] [payload]
