@@ -34,8 +34,8 @@ class TcpClient {
     }
     sendHandshake() {
         // Handshake packet: protocol version (VarInt), server address (string), server port (uint16), next state (VarInt: 2 for login)
-        const protocolVersion = 767; // 1.21
-        const serverAddress = '149.28.41.250'; // Use IP instead of domain
+        const protocolVersion = 763; // 1.20.1
+        const serverAddress = this.host; // Use the actual host from config
         const serverPort = this.port;
         const nextState = 2; // login
         const protocolEncoded = VarInt_1.VarInt.encode(protocolVersion);
