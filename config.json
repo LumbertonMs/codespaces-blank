@@ -1,5 +1,5 @@
 {
   "backend_host": "fluxskyblock.mcsh.io",
-  "backend_port": 10395,
+  "backend_port": 25565,
   "max_clients": 200
 }

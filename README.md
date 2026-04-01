@@ -14,7 +14,7 @@ A standalone Node.js application that acts as a gateway between browser-based cl
 ## Custom Protocol
 
 ### Client to Gateway (WebSocket Frames)
-Frames use format: `[opcode: uint8] [length: VarInt] [payload: bytes]`
+Frames use format: `[packetId: uint8] [payload: bytes]`
 
 - `0x00`: Login Request - payload: username (string)
 - `0x01`: Keepalive Response - payload: keepalive ID (int64)
@@ -43,7 +43,7 @@ Edit `config.json` to change backend server settings:
 ```json
 {
   "backend_host": "fluxskyblock.mcsh.io",
-  "backend_port": 10395,
+  "backend_port": 25565,
   "max_clients": 200
 }
 ```

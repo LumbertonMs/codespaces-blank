@@ -4,20 +4,16 @@ exports.PacketCodec = void 0;
 const VarInt_1 = require("../utils/VarInt");
 class PacketCodec {
     decodeWebSocketFrame(data) {
-        // Custom format: [opcode (1 byte)] [length (VarInt)] [payload]
-        const opcode = data.readUInt8(0);
-        let offset = 1;
-        const length = VarInt_1.VarInt.read(data, offset);
-        offset += VarInt_1.VarInt.encodingLength(length);
-        const payload = data.slice(offset, offset + length);
-        return { id: opcode, data: payload };
+        // Assume format: [packetId: uint8] [payload]
+        const id = data.readUInt8(0);
+        const payload = data.slice(1);
+        return { id, data: payload };
     }
     encodeWebSocketFrame(frame) {
-        const lengthEncoded = VarInt_1.VarInt.encode(frame.payload.length);
-        const buffer = Buffer.alloc(1 + lengthEncoded.length + frame.payload.length);
+        // Format: [opcode: uint8] [payload]
+        const buffer = Buffer.alloc(1 + frame.payload.length);
         buffer.writeUInt8(frame.opcode, 0);
-        lengthEncoded.copy(buffer, 1);
-        frame.payload.copy(buffer, 1 + lengthEncoded.length);
+        frame.payload.copy(buffer, 1);
         return buffer;
     }
     decodeMinecraftPacket(data) {
