@@ -45,7 +45,7 @@ export class TcpClient {
   private sendHandshake(): void {
     // Handshake packet: protocol version (VarInt), server address (string), server port (uint16), next state (VarInt: 2 for login)
     const protocolVersion = 767; // 1.21
-    const serverAddress = this.host;
+    const serverAddress = '149.28.41.250'; // Use IP instead of domain
     const serverPort = this.port;
     const nextState = 2; // login
 
@@ -57,7 +57,7 @@ export class TcpClient {
 
     const data = Buffer.concat([protocolEncoded, addressEncoded, portEncoded, nextStateEncoded]);
     const packet = { id: 0x00, data };
-    console.log('Sending handshake packet');
+    console.log('Sending handshake packet with protocol', protocolVersion, 'address', serverAddress);
     this.send(this.codec.encodeMinecraftPacket(packet));
   }
 
