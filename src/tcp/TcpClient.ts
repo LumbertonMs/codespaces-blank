@@ -45,8 +45,8 @@ export class TcpClient {
   private sendHandshake(): void {
     // Handshake packet: protocol version (VarInt), server address (string), server port (uint16), next state (VarInt: 2 for login)
     const protocolVersion = 767; // 1.21
-    const serverAddress = 'fluxskyblock.mcsh.io';
-    const serverPort = 10395;
+    const serverAddress = this.host;
+    const serverPort = this.port;
     const nextState = 2; // login
 
     const protocolEncoded = VarInt.encode(protocolVersion);
