@@ -23,6 +23,7 @@ export class PacketRouter {
     this.clientTranslators.set(0x01, new KeepAliveTranslator()); // Keepalive Response
     this.clientTranslators.set(0x02, new PlayerPositionTranslator()); // Movement Input
     this.clientTranslators.set(0x03, new ChatMessageTranslator()); // Chat Message
+    this.clientTranslators.set(65, new HandshakeTranslator()); // Temporary: handle client sending 65 as login
 
     // Server packet IDs to translators
     this.serverTranslators.set(0x02, new HandshakeTranslator()); // Login Success

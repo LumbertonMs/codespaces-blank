@@ -22,6 +22,7 @@ class PacketRouter {
         this.clientTranslators.set(0x01, new KeepAliveTranslator_1.KeepAliveTranslator()); // Keepalive Response
         this.clientTranslators.set(0x02, new PlayerPositionTranslator_1.PlayerPositionTranslator()); // Movement Input
         this.clientTranslators.set(0x03, new ChatMessageTranslator_1.ChatMessageTranslator()); // Chat Message
+        this.clientTranslators.set(65, new HandshakeTranslator_1.HandshakeTranslator()); // Temporary: handle client sending 65 as login
         // Server packet IDs to translators
         this.serverTranslators.set(0x02, new HandshakeTranslator_1.HandshakeTranslator()); // Login Success
         this.serverTranslators.set(0x26, new JoinGameTranslator_1.JoinGameTranslator()); // Join Game
