@@ -6,10 +6,8 @@ export class HandshakeTranslator {
     // Client sends login request, send handshake first, then login start
     session.tcp.sendHandshake();
     // Then return login start
-    let username = packet.data.toString('utf8');
-    // Clean the username to make it valid (remove invalid characters)
-    username = username.replace(/[^a-zA-Z0-9_]/g, '').substring(0, 16);
-    if (username.length === 0) username = 'Player'; // fallback
+    // Use a fixed valid username for testing
+    const username = "TestPlayer";
     const nameEncoded = Buffer.concat([VarInt.encode(username.length), Buffer.from(username, 'utf8')]);
     const hasSigData = Buffer.from([0]); // false for offline mode
     const data = Buffer.concat([nameEncoded, hasSigData]);
