@@ -1,7 +1,7 @@
 import { Packet } from '../protocol/PacketCodec';
 
 export class PlayerPositionTranslator {
-  toMinecraft(packet: Packet): Packet {
+  toMinecraft(session: any, packet: Packet): Packet {
     // Client opcode 0x02: Movement Input -> Player Position + Rotation
     return {
       id: 0x14, // Player Position and Rotation

@@ -19,8 +19,7 @@ class TcpClient {
         this.socket = new net_1.Socket();
         this.socket.connect(port, host, () => {
             console.log(`TCP connected to ${host}:${port}`);
-            // Send handshake
-            this.sendHandshake();
+            // Handshake will be sent when client sends login
         });
         this.socket.on('data', (data) => {
             console.log('Received TCP data:', data.length, 'bytes');

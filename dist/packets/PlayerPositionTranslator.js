@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayerPositionTranslator = void 0;
 class PlayerPositionTranslator {
-    toMinecraft(packet) {
+    toMinecraft(session, packet) {
         // Client opcode 0x02: Movement Input -> Player Position + Rotation
         return {
             id: 0x14, // Player Position and Rotation

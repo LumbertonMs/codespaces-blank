@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KeepAliveTranslator = void 0;
 class KeepAliveTranslator {
-    toMinecraft(packet) {
+    toMinecraft(session, packet) {
         // Client opcode 0x01: Keepalive Response with id
         return {
             id: 0x0F, // KeepAlive response

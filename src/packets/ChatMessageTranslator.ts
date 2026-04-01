@@ -1,7 +1,7 @@
 import { Packet } from '../protocol/PacketCodec';
 
 export class ChatMessageTranslator {
-  toMinecraft(packet: Packet): Packet {
+  toMinecraft(session: any, packet: Packet): Packet {
     // Client opcode 0x03: Chat Message
     return {
       id: 0x05, // Chat Message

@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DisconnectTranslator = void 0;
 class DisconnectTranslator {
-    toMinecraft(packet) {
+    toMinecraft(session, packet) {
         // Not used
-        return { id: 0, data: Buffer.alloc(0) };
+        return null;
     }
     fromMinecraft(packet) {
         // Server Disconnect -> client opcode 0x05

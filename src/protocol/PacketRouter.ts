@@ -41,9 +41,11 @@ export class PacketRouter {
     console.log('Decoded client packet - ID:', packet.id, 'Data length:', packet.data.length);
     const translator = this.clientTranslators.get(packet.id);
     if (translator) {
-      const mcPacket = translator.toMinecraft(packet);
-      console.log('Translated to Minecraft packet - ID:', mcPacket.id);
-      session.tcp.send(this.codec.encodeMinecraftPacket(mcPacket));
+      const mcPacket = translator.toMinecraft(session, packet);
+      if (mcPacket) {
+        console.log('Translated to Minecraft packet - ID:', mcPacket.id);
+        session.tcp.send(this.codec.encodeMinecraftPacket(mcPacket));
+      }
     } else {
       console.log('No translator found for client packet ID:', packet.id);
     }

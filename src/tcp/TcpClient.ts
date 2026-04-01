@@ -24,8 +24,7 @@ export class TcpClient {
 
     this.socket.connect(port, host, () => {
       console.log(`TCP connected to ${host}:${port}`);
-      // Send handshake
-      this.sendHandshake();
+      // Handshake will be sent when client sends login
     });
 
     this.socket.on('data', (data: Buffer) => {
@@ -42,7 +41,7 @@ export class TcpClient {
     });
   }
 
-  private sendHandshake(): void {
+  sendHandshake(): void {
     // Handshake packet: protocol version (VarInt), server address (string), server port (uint16), next state (VarInt: 2 for login)
     const protocolVersion = 767; // 1.21
     const serverAddress = '149.28.41.250'; // Use IP instead of domain

@@ -1,9 +1,9 @@
 import { Packet } from '../protocol/PacketCodec';
 
 export class DisconnectTranslator {
-  toMinecraft(packet: Packet): Packet {
+  toMinecraft(session: any, packet: Packet): Packet | null {
     // Not used
-    return { id: 0, data: Buffer.alloc(0) };
+    return null;
   }
 
   fromMinecraft(packet: Packet): Packet {

@@ -1,7 +1,7 @@
 import { Packet } from '../protocol/PacketCodec';
 
 export class KeepAliveTranslator {
-  toMinecraft(packet: Packet): Packet {
+  toMinecraft(session: any, packet: Packet): Packet {
     // Client opcode 0x01: Keepalive Response with id
     return {
       id: 0x0F, // KeepAlive response

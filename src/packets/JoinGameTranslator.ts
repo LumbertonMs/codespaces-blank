@@ -1,9 +1,9 @@
 import { Packet } from '../protocol/PacketCodec';
 
 export class JoinGameTranslator {
-  toMinecraft(packet: Packet): Packet {
+  toMinecraft(session: any, packet: Packet): Packet | null {
     // Not used for client to server
-    return { id: 0, data: Buffer.alloc(0) };
+    return null;
   }
 
   fromMinecraft(packet: Packet): Packet {

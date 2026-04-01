@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JoinGameTranslator = void 0;
 class JoinGameTranslator {
-    toMinecraft(packet) {
+    toMinecraft(session, packet) {
         // Not used for client to server
-        return { id: 0, data: Buffer.alloc(0) };
+        return null;
     }
     fromMinecraft(packet) {
         // Server Join Game -> client opcode 0x01: Join World
