@@ -26,6 +26,7 @@ export class PacketRouter {
     this.clientTranslators.set(65, new HandshakeTranslator()); // Temporary: handle client sending 65 as login
 
     // Server packet IDs to translators
+    this.serverTranslators.set(0x00, new DisconnectTranslator()); // Login Disconnect
     this.serverTranslators.set(0x02, new HandshakeTranslator()); // Login Success
     this.serverTranslators.set(0x26, new JoinGameTranslator()); // Join Game
     this.serverTranslators.set(0x21, new KeepAliveTranslator()); // KeepAlive

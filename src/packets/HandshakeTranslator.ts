@@ -6,9 +6,11 @@ export class HandshakeTranslator {
     // Client opcode 0x00: Login Request with username -> Login Start
     const username = packet.data.toString('utf8');
     const nameEncoded = Buffer.concat([VarInt.encode(username.length), Buffer.from(username, 'utf8')]);
+    const hasSigData = Buffer.from([0]); // false for offline mode
+    const data = Buffer.concat([nameEncoded, hasSigData]);
     return {
       id: 0x00, // Login Start
-      data: nameEncoded
+      data: data
     };
   }
 
