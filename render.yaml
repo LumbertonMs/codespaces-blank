@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: minecraft-gateway
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        generateValue: true
